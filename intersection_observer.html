@@ -14,9 +14,10 @@
         height: 300px;
         margin: 80px auto;
         background-color: plum;
-        transition: 250ms;
+        transition: 2000ms;
       }
 
+      
       .box.active {
         background-color: purple;
       }
@@ -44,6 +45,21 @@
     <div class="box">19</div>
     <div class="box">20</div>
 
-    <script></script>
+    <script>
+      observer = new IntersectionObserver((entries, obserser) => {
+        entries.forEach((entry) => {
+          if(entry.isIntersecting){
+            entry.target.classList.add('active')
+          } else {
+            entry.target.classList.remove('active')
+          }          
+        })
+      });
+
+      const boxes = document.querySelectorAll('.box');
+      boxes.forEach(box => observer.observe(box));
+      
+      
+    </script>
   </body>
 </html>
